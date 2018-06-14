@@ -1,0 +1,3159 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis projectname="" version="3.0.3-Girona">
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <trust active="0"/>
+  <projectCrs>
+    <spatialrefsys>
+      <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+      <srsid>3452</srsid>
+      <srid>4326</srid>
+      <authid>EPSG:4326</authid>
+      <description>WGS 84</description>
+      <projectionacronym>longlat</projectionacronym>
+      <ellipsoidacronym>WGS84</ellipsoidacronym>
+      <geographicflag>true</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <layer-tree-group>
+    <customproperties/>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table=&quot;(SELECT row_number() over () AS _uid_,* FROM (SELECT d.*,&#xa;st_makeline(st_makepoint(s1.stop_lon, s1.stop_lat),&#xa;&#x9;st_makepoint(s2.stop_lon, s2.stop_lat)) AS geom&#xa;FROM delay AS d&#xa;INNER JOIN gtfs_stops AS s1 ON d.from_id = s1.stop_id&#xa;INNER JOIN gtfs_stops AS s2 ON d.to_id = s2.stop_id&#xa;) AS _subq_1_&#xa;)&quot; (geom) sql=" name="delays2" expanded="1" id="delays2_8a796229_e68c_4736_919c_a2949cdec10d" providerKey="postgres" checked="Qt::Unchecked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="file:///home/jethro/polohy/delays.csv?type=csv&amp;useHeader=No&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" name="delays" expanded="1" id="delays_6a82e804_0cba_4031_bc8d_245f87b2d73b" providerKey="delimitedtext" checked="Qt::Checked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table=&quot;(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(lon,lat) as geom FROM pos_log &#xa;WHERE to_timestamp(timestamp) > now() - interval '15 minutes'&#xa;ORDER BY delay ASC) AS _subq_1_&#xa;)&quot; (geom) sql=" name="delay_now" expanded="1" id="delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e" providerKey="postgres" checked="Qt::Checked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table=&quot;(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(stop_lon,stop_lat) as geom FROM gtfs_stops) AS _subq_1_&#xa;)&quot; (geom) sql=" name="stops" expanded="1" id="stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5" providerKey="postgres" checked="Qt::Unchecked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table=&quot;(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(stop_lon,stop_lat) as geom FROM gtfs_stops) AS _subq_1_&#xa;)&quot; (geom) sql=" name="stops kopírovat" expanded="1" id="stops_8bccdd91_058b_40a4_9156_e5d9e2725057" providerKey="postgres" checked="Qt::Unchecked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table=&quot;(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(lon,lat) as geom FROM pos_log WHERE delay >=-20) AS _subq_1_&#xa;)&quot; (geom) sql=" name="pos_log" expanded="1" id="pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da" providerKey="postgres" checked="Qt::Unchecked">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer source="dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='tid' srid=0 type=LineString checkPrimaryKeyUnicity='1' table=&quot;public&quot;.&quot;shapes&quot; (shape) sql=" name="shapes" expanded="1" id="shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5" providerKey="postgres" checked="Qt::Checked">
+      <customproperties/>
+    </layer-tree-layer>
+    <custom-order enabled="0">
+      <item>pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da</item>
+      <item>shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5</item>
+      <item>stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5</item>
+      <item>delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e</item>
+      <item>delays_6a82e804_0cba_4031_bc8d_245f87b2d73b</item>
+      <item>stops_8bccdd91_058b_40a4_9156_e5d9e2725057</item>
+      <item>delays2_8a796229_e68c_4736_919c_a2949cdec10d</item>
+    </custom-order>
+  </layer-tree-group>
+  <snapping-settings unit="1" mode="2" enabled="0" intersection-snapping="0" tolerance="12" type="1">
+    <individual-layer-settings>
+      <layer-setting enabled="1" tolerance="12" id="delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e" type="1" units="1"/>
+      <layer-setting enabled="1" tolerance="12" id="pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da" type="1" units="1"/>
+      <layer-setting enabled="1" tolerance="12" id="stops_8bccdd91_058b_40a4_9156_e5d9e2725057" type="1" units="1"/>
+      <layer-setting enabled="1" tolerance="12" id="stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5" type="1" units="1"/>
+      <layer-setting enabled="1" tolerance="12" id="delays2_8a796229_e68c_4736_919c_a2949cdec10d" type="1" units="1"/>
+      <layer-setting enabled="1" tolerance="12" id="shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5" type="1" units="1"/>
+    </individual-layer-settings>
+  </snapping-settings>
+  <relations/>
+  <mapcanvas annotationsVisible="1" name="theMapCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>13.24371318514755558</xmin>
+      <ymin>49.94131290527151634</ymin>
+      <xmax>15.3796010719011349</xmax>
+      <ymax>51.31815534401221157</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <legend updateDrawingOrder="true">
+    <legendlayer drawingOrder="-1" open="true" name="delays2" showFeatureCount="0" checked="Qt::Unchecked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="delays2_8a796229_e68c_4736_919c_a2949cdec10d"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="delays" showFeatureCount="0" checked="Qt::Checked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" isInOverview="0" layerid="delays_6a82e804_0cba_4031_bc8d_245f87b2d73b"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="delay_now" showFeatureCount="0" checked="Qt::Checked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" isInOverview="0" layerid="delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="stops" showFeatureCount="0" checked="Qt::Unchecked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="stops kopírovat" showFeatureCount="0" checked="Qt::Unchecked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="stops_8bccdd91_058b_40a4_9156_e5d9e2725057"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="pos_log" showFeatureCount="0" checked="Qt::Unchecked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" name="shapes" showFeatureCount="0" checked="Qt::Checked">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" isInOverview="0" layerid="shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <mapcanvas annotationsVisible="1" name="">
+    <units>unknown</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <projectlayers>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="0" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Point">
+      <extent>
+        <xmin>14.06933000000000078</xmin>
+        <ymin>49.75027999999999651</ymin>
+        <xmax>15.27189000000000085</xmax>
+        <ymax>50.37447999999999837</ymax>
+      </extent>
+      <id>delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table="(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(lon,lat) as geom FROM pos_log 
+WHERE to_timestamp(timestamp) > now() - interval '15 minutes'
+ORDER BY delay ASC) AS _subq_1_
+)" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>delay_now</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" attr="delay" type="graduatedSymbol" forceraster="0" graduatedMethod="GraduatedColor">
+        <ranges>
+          <range lower="-17.000000000000000" render="true" label=" -17 - 60 " symbol="0" upper="60.000000000000000"/>
+          <range lower="60.000000000000000" render="true" label=" 60 - 120 " symbol="1" upper="120.000000000000000"/>
+          <range lower="120.000000000000000" render="true" label=" 120 - 300 " symbol="2" upper="300.000000000000000"/>
+          <range lower="300.000000000000000" render="true" label=" 300 - 600 " symbol="3" upper="600.000000000000000"/>
+          <range lower="600.000000000000000" render="true" label=" 600 - 2385 " symbol="4" upper="2385.000000000000000"/>
+        </ranges>
+        <symbols>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="0,172,48,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="1" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="106,100,28,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="2" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="171,56,16,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="3" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="213,28,8,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="4" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="29,191,59,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp name="[source]" type="gradient">
+          <prop k="color1" v="0,172,48,255"/>
+          <prop k="color2" v="255,0,0,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="rampType" v="gradient"/>
+          <prop k="stops" v="0.336538;143,75,21,255"/>
+        </colorramp>
+        <mode name="quantile"/>
+        <rotation/>
+        <sizescale/>
+        <labelformat format=" %1 - %2 " decimalplaces="0" trimtrailingzeroes="false"/>
+      </renderer-v2>
+      <customproperties>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penColor="#000000" enabled="0" maxScaleDenominator="1e+8" lineSizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundColor="#ffffff" width="15" penWidth="0" opacity="1" scaleDependency="Area" backgroundAlpha="255" minScaleDenominator="0" scaleBasedVisibility="0" rotationOffset="270" diagramOrientation="Up" height="15" labelPlacementMethod="XHeight" sizeType="MM" penAlpha="255">
+          <fontProperties description="Sans Serif,9,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute color="#000000" label="" field=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings showAll="1" obstacle="0" dist="0" placement="0" zIndex="0" linePlacementFlags="18" priority="0">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <fieldConfiguration>
+        <field name="_uid_">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="trip_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="route_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="route_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="cisrouteid">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tripnumber">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="headsign">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="runningnumber">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="canceled">
+          <editWidget type="CheckBox">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="trackingstatus">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="wheelchairaccess">
+          <editWidget type="CheckBox">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lon">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="delay">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="measuredstopid">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="measuredstopsequence">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="timestamp">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="_uid_"/>
+        <alias index="1" name="" field="trip_id"/>
+        <alias index="2" name="" field="route_id"/>
+        <alias index="3" name="" field="route_name"/>
+        <alias index="4" name="" field="cisrouteid"/>
+        <alias index="5" name="" field="tripnumber"/>
+        <alias index="6" name="" field="headsign"/>
+        <alias index="7" name="" field="runningnumber"/>
+        <alias index="8" name="" field="canceled"/>
+        <alias index="9" name="" field="trackingstatus"/>
+        <alias index="10" name="" field="wheelchairaccess"/>
+        <alias index="11" name="" field="lat"/>
+        <alias index="12" name="" field="lon"/>
+        <alias index="13" name="" field="delay"/>
+        <alias index="14" name="" field="measuredstopid"/>
+        <alias index="15" name="" field="measuredstopsequence"/>
+        <alias index="16" name="" field="timestamp"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="_uid_" applyOnUpdate="0"/>
+        <default expression="" field="trip_id" applyOnUpdate="0"/>
+        <default expression="" field="route_id" applyOnUpdate="0"/>
+        <default expression="" field="route_name" applyOnUpdate="0"/>
+        <default expression="" field="cisrouteid" applyOnUpdate="0"/>
+        <default expression="" field="tripnumber" applyOnUpdate="0"/>
+        <default expression="" field="headsign" applyOnUpdate="0"/>
+        <default expression="" field="runningnumber" applyOnUpdate="0"/>
+        <default expression="" field="canceled" applyOnUpdate="0"/>
+        <default expression="" field="trackingstatus" applyOnUpdate="0"/>
+        <default expression="" field="wheelchairaccess" applyOnUpdate="0"/>
+        <default expression="" field="lat" applyOnUpdate="0"/>
+        <default expression="" field="lon" applyOnUpdate="0"/>
+        <default expression="" field="delay" applyOnUpdate="0"/>
+        <default expression="" field="measuredstopid" applyOnUpdate="0"/>
+        <default expression="" field="measuredstopsequence" applyOnUpdate="0"/>
+        <default expression="" field="timestamp" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="_uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="trip_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="route_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="route_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="cisrouteid" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="tripnumber" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="headsign" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="runningnumber" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="canceled" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="trackingstatus" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="wheelchairaccess" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="delay" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="measuredstopid" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="measuredstopsequence" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="timestamp" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="_uid_" desc=""/>
+        <constraint exp="" field="trip_id" desc=""/>
+        <constraint exp="" field="route_id" desc=""/>
+        <constraint exp="" field="route_name" desc=""/>
+        <constraint exp="" field="cisrouteid" desc=""/>
+        <constraint exp="" field="tripnumber" desc=""/>
+        <constraint exp="" field="headsign" desc=""/>
+        <constraint exp="" field="runningnumber" desc=""/>
+        <constraint exp="" field="canceled" desc=""/>
+        <constraint exp="" field="trackingstatus" desc=""/>
+        <constraint exp="" field="wheelchairaccess" desc=""/>
+        <constraint exp="" field="lat" desc=""/>
+        <constraint exp="" field="lon" desc=""/>
+        <constraint exp="" field="delay" desc=""/>
+        <constraint exp="" field="measuredstopid" desc=""/>
+        <constraint exp="" field="measuredstopsequence" desc=""/>
+        <constraint exp="" field="timestamp" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" width="-1" name="_uid_" type="field"/>
+          <column hidden="0" width="-1" name="trip_id" type="field"/>
+          <column hidden="0" width="-1" name="route_id" type="field"/>
+          <column hidden="0" width="-1" name="route_name" type="field"/>
+          <column hidden="0" width="-1" name="cisrouteid" type="field"/>
+          <column hidden="0" width="-1" name="tripnumber" type="field"/>
+          <column hidden="0" width="-1" name="headsign" type="field"/>
+          <column hidden="0" width="-1" name="runningnumber" type="field"/>
+          <column hidden="0" width="-1" name="canceled" type="field"/>
+          <column hidden="0" width="-1" name="trackingstatus" type="field"/>
+          <column hidden="0" width="-1" name="wheelchairaccess" type="field"/>
+          <column hidden="0" width="-1" name="lat" type="field"/>
+          <column hidden="0" width="-1" name="lon" type="field"/>
+          <column hidden="0" width="-1" name="delay" type="field"/>
+          <column hidden="0" width="-1" name="measuredstopid" type="field"/>
+          <column hidden="0" width="-1" name="measuredstopsequence" type="field"/>
+          <column hidden="0" width="-1" name="timestamp" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="_uid_" editable="1"/>
+        <field name="canceled" editable="1"/>
+        <field name="cisrouteid" editable="1"/>
+        <field name="delay" editable="1"/>
+        <field name="headsign" editable="1"/>
+        <field name="lat" editable="1"/>
+        <field name="lon" editable="1"/>
+        <field name="measuredstopid" editable="1"/>
+        <field name="measuredstopsequence" editable="1"/>
+        <field name="route_id" editable="1"/>
+        <field name="route_name" editable="1"/>
+        <field name="runningnumber" editable="1"/>
+        <field name="timestamp" editable="1"/>
+        <field name="trackingstatus" editable="1"/>
+        <field name="trip_id" editable="1"/>
+        <field name="tripnumber" editable="1"/>
+        <field name="wheelchairaccess" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="_uid_" labelOnTop="0"/>
+        <field name="canceled" labelOnTop="0"/>
+        <field name="cisrouteid" labelOnTop="0"/>
+        <field name="delay" labelOnTop="0"/>
+        <field name="headsign" labelOnTop="0"/>
+        <field name="lat" labelOnTop="0"/>
+        <field name="lon" labelOnTop="0"/>
+        <field name="measuredstopid" labelOnTop="0"/>
+        <field name="measuredstopsequence" labelOnTop="0"/>
+        <field name="route_id" labelOnTop="0"/>
+        <field name="route_name" labelOnTop="0"/>
+        <field name="runningnumber" labelOnTop="0"/>
+        <field name="timestamp" labelOnTop="0"/>
+        <field name="trackingstatus" labelOnTop="0"/>
+        <field name="trip_id" labelOnTop="0"/>
+        <field name="tripnumber" labelOnTop="0"/>
+        <field name="wheelchairaccess" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>_uid_</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Line">
+      <extent>
+        <xmin>14.01638999999999946</xmin>
+        <ymin>49.65762000000000143</ymin>
+        <xmax>15.27224999999999966</xmax>
+        <ymax>50.45617000000000019</ymax>
+      </extent>
+      <id>delays2_8a796229_e68c_4736_919c_a2949cdec10d</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table="(SELECT row_number() over () AS _uid_,* FROM (SELECT d.*,
+st_makeline(st_makepoint(s1.stop_lon, s1.stop_lat),
+	st_makepoint(s2.stop_lon, s2.stop_lat)) AS geom
+FROM delay AS d
+INNER JOIN gtfs_stops AS s1 ON d.from_id = s1.stop_id
+INNER JOIN gtfs_stops AS s2 ON d.to_id = s2.stop_id
+) AS _subq_1_
+)" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>delays2</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minz="0" maxy="0" maxz="0" miny="0" crs="" maxx="0" minx="0" dimensions="2"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" attr="ddelay" type="graduatedSymbol" forceraster="0" graduatedMethod="GraduatedColor">
+        <ranges>
+          <range lower="-30.000000000000000" render="true" label=" -987.5000 - -517.8000 " symbol="0" upper="20.000000000000000"/>
+          <range lower="20.000000000000000" render="true" label=" -517.8000 - -48.1000 " symbol="1" upper="40.000000000000000"/>
+          <range lower="40.000000000000000" render="true" label=" -48.1000 - 421.6000 " symbol="2" upper="80.000000000000000"/>
+          <range lower="80.000000000000000" render="true" label=" 421.6000 - 891.3000 " symbol="3" upper="160.000000000000000"/>
+          <range lower="160.000000000000000" render="true" label=" 891.3000 - 1361.0000 " symbol="4" upper="1361.000000000000000"/>
+        </ranges>
+        <symbols>
+          <symbol clip_to_extent="1" alpha="0.5" name="0" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="255,255,255,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="0.5" name="1" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="255,191,191,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="0.5" name="2" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="255,128,128,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="0.5" name="3" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="255,64,64,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="0.5" name="4" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="255,0,0,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol clip_to_extent="1" alpha="0.5" name="0" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="round"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="157,95,169,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="2"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp name="[source]" type="gradient">
+          <prop k="color1" v="255,255,255,255"/>
+          <prop k="color2" v="255,0,0,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="rampType" v="gradient"/>
+        </colorramp>
+        <mode name="equal"/>
+        <rotation/>
+        <sizescale/>
+        <labelformat format=" %1 - %2 " decimalplaces="0" trimtrailingzeroes="false"/>
+      </renderer-v2>
+      <customproperties>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penColor="#000000" enabled="0" maxScaleDenominator="1e+8" lineSizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundColor="#ffffff" width="15" penWidth="0" opacity="1" scaleDependency="Area" backgroundAlpha="255" minScaleDenominator="0" scaleBasedVisibility="0" rotationOffset="270" diagramOrientation="Up" height="15" labelPlacementMethod="XHeight" sizeType="MM" penAlpha="255">
+          <fontProperties description="Sans Serif,9,-1,5,50,0,0,0,0,0" style=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings showAll="1" obstacle="0" dist="0" placement="2" zIndex="0" linePlacementFlags="18" priority="0">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <fieldConfiguration>
+        <field name="_uid_">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="from_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="to_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ddelay">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="_uid_"/>
+        <alias index="1" name="" field="from_id"/>
+        <alias index="2" name="" field="to_id"/>
+        <alias index="3" name="" field="ddelay"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="_uid_" applyOnUpdate="0"/>
+        <default expression="" field="from_id" applyOnUpdate="0"/>
+        <default expression="" field="to_id" applyOnUpdate="0"/>
+        <default expression="" field="ddelay" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="_uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="from_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="to_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="ddelay" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="_uid_" desc=""/>
+        <constraint exp="" field="from_id" desc=""/>
+        <constraint exp="" field="to_id" desc=""/>
+        <constraint exp="" field="ddelay" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" width="-1" name="_uid_" type="field"/>
+          <column hidden="0" width="-1" name="from_id" type="field"/>
+          <column hidden="0" width="-1" name="to_id" type="field"/>
+          <column hidden="0" width="-1" name="ddelay" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="_uid_" editable="1"/>
+        <field name="ddelay" editable="1"/>
+        <field name="from_id" editable="1"/>
+        <field name="to_id" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="_uid_" labelOnTop="0"/>
+        <field name="ddelay" labelOnTop="0"/>
+        <field name="from_id" labelOnTop="0"/>
+        <field name="to_id" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>_uid_</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" refreshOnNotifyEnabled="0" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" maxScale="0" type="vector" geometry="No geometry">
+      <id>delays_6a82e804_0cba_4031_bc8d_245f87b2d73b</id>
+      <datasource>file:./delays.csv?type=csv&amp;useHeader=No&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>delays</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minz="0" maxy="0" maxz="0" miny="0" crs="" maxx="0" minx="0" dimensions="2"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+      </resourceMetadata>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>field_1</value>
+        </property>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <provider encoding="UTF-8">delimitedtext</provider>
+      <vectorjoins>
+        <join joinFieldName="stop_id" cascadedDelete="0" memoryCache="1" dynamicForm="0" targetFieldName="field_1" upsertOnEdit="0" editable="0" joinLayerId="stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5"/>
+        <join joinFieldName="stop_id" cascadedDelete="0" memoryCache="1" dynamicForm="0" targetFieldName="field_2" upsertOnEdit="0" editable="0" joinLayerId="stops_8bccdd91_058b_40a4_9156_e5d9e2725057"/>
+      </vectorjoins>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <fieldConfiguration>
+        <field name="field_1">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="field_2">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="field_3">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops__uid_">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_stop_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_stop_lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_stop_lon">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_zone_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_stop_url">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_location_type">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_parent_station">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_wheelchair_boarding">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops_platform_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat__uid_">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_stop_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_stop_lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_stop_lon">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_zone_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_stop_url">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_location_type">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_parent_station">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_wheelchair_boarding">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stops kopírovat_platform_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="field_1"/>
+        <alias index="1" name="" field="field_2"/>
+        <alias index="2" name="" field="field_3"/>
+        <alias index="3" name="" field="stops__uid_"/>
+        <alias index="4" name="" field="stops_stop_name"/>
+        <alias index="5" name="" field="stops_stop_lat"/>
+        <alias index="6" name="" field="stops_stop_lon"/>
+        <alias index="7" name="" field="stops_zone_id"/>
+        <alias index="8" name="" field="stops_stop_url"/>
+        <alias index="9" name="" field="stops_location_type"/>
+        <alias index="10" name="" field="stops_parent_station"/>
+        <alias index="11" name="" field="stops_wheelchair_boarding"/>
+        <alias index="12" name="" field="stops_platform_code"/>
+        <alias index="13" name="" field="stops kopírovat__uid_"/>
+        <alias index="14" name="" field="stops kopírovat_stop_name"/>
+        <alias index="15" name="" field="stops kopírovat_stop_lat"/>
+        <alias index="16" name="" field="stops kopírovat_stop_lon"/>
+        <alias index="17" name="" field="stops kopírovat_zone_id"/>
+        <alias index="18" name="" field="stops kopírovat_stop_url"/>
+        <alias index="19" name="" field="stops kopírovat_location_type"/>
+        <alias index="20" name="" field="stops kopírovat_parent_station"/>
+        <alias index="21" name="" field="stops kopírovat_wheelchair_boarding"/>
+        <alias index="22" name="" field="stops kopírovat_platform_code"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="field_1" applyOnUpdate="0"/>
+        <default expression="" field="field_2" applyOnUpdate="0"/>
+        <default expression="" field="field_3" applyOnUpdate="0"/>
+        <default expression="" field="stops__uid_" applyOnUpdate="0"/>
+        <default expression="" field="stops_stop_name" applyOnUpdate="0"/>
+        <default expression="" field="stops_stop_lat" applyOnUpdate="0"/>
+        <default expression="" field="stops_stop_lon" applyOnUpdate="0"/>
+        <default expression="" field="stops_zone_id" applyOnUpdate="0"/>
+        <default expression="" field="stops_stop_url" applyOnUpdate="0"/>
+        <default expression="" field="stops_location_type" applyOnUpdate="0"/>
+        <default expression="" field="stops_parent_station" applyOnUpdate="0"/>
+        <default expression="" field="stops_wheelchair_boarding" applyOnUpdate="0"/>
+        <default expression="" field="stops_platform_code" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat__uid_" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_stop_name" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_stop_lat" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_stop_lon" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_zone_id" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_stop_url" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_location_type" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_parent_station" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_wheelchair_boarding" applyOnUpdate="0"/>
+        <default expression="" field="stops kopírovat_platform_code" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="field_1" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="field_2" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="field_3" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops__uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="stops_stop_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_stop_lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_stop_lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_zone_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_stop_url" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_location_type" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_parent_station" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_wheelchair_boarding" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops_platform_code" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat__uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="stops kopírovat_stop_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_stop_lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_stop_lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_zone_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_stop_url" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_location_type" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_parent_station" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_wheelchair_boarding" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stops kopírovat_platform_code" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="field_1" desc=""/>
+        <constraint exp="" field="field_2" desc=""/>
+        <constraint exp="" field="field_3" desc=""/>
+        <constraint exp="" field="stops__uid_" desc=""/>
+        <constraint exp="" field="stops_stop_name" desc=""/>
+        <constraint exp="" field="stops_stop_lat" desc=""/>
+        <constraint exp="" field="stops_stop_lon" desc=""/>
+        <constraint exp="" field="stops_zone_id" desc=""/>
+        <constraint exp="" field="stops_stop_url" desc=""/>
+        <constraint exp="" field="stops_location_type" desc=""/>
+        <constraint exp="" field="stops_parent_station" desc=""/>
+        <constraint exp="" field="stops_wheelchair_boarding" desc=""/>
+        <constraint exp="" field="stops_platform_code" desc=""/>
+        <constraint exp="" field="stops kopírovat__uid_" desc=""/>
+        <constraint exp="" field="stops kopírovat_stop_name" desc=""/>
+        <constraint exp="" field="stops kopírovat_stop_lat" desc=""/>
+        <constraint exp="" field="stops kopírovat_stop_lon" desc=""/>
+        <constraint exp="" field="stops kopírovat_zone_id" desc=""/>
+        <constraint exp="" field="stops kopírovat_stop_url" desc=""/>
+        <constraint exp="" field="stops kopírovat_location_type" desc=""/>
+        <constraint exp="" field="stops kopírovat_parent_station" desc=""/>
+        <constraint exp="" field="stops kopírovat_wheelchair_boarding" desc=""/>
+        <constraint exp="" field="stops kopírovat_platform_code" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" width="-1" name="field_1" type="field"/>
+          <column hidden="0" width="-1" name="field_2" type="field"/>
+          <column hidden="0" width="-1" name="field_3" type="field"/>
+          <column hidden="0" width="-1" name="stops__uid_" type="field"/>
+          <column hidden="0" width="-1" name="stops_stop_name" type="field"/>
+          <column hidden="0" width="-1" name="stops_stop_lat" type="field"/>
+          <column hidden="0" width="-1" name="stops_stop_lon" type="field"/>
+          <column hidden="0" width="-1" name="stops_zone_id" type="field"/>
+          <column hidden="0" width="-1" name="stops_stop_url" type="field"/>
+          <column hidden="0" width="-1" name="stops_location_type" type="field"/>
+          <column hidden="0" width="-1" name="stops_parent_station" type="field"/>
+          <column hidden="0" width="-1" name="stops_wheelchair_boarding" type="field"/>
+          <column hidden="0" width="-1" name="stops_platform_code" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+          <column hidden="0" width="-1" name="stops kopírovat__uid_" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_stop_name" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_stop_lat" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_stop_lon" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_zone_id" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_stop_url" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_location_type" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_parent_station" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_wheelchair_boarding" type="field"/>
+          <column hidden="0" width="-1" name="stops kopírovat_platform_code" type="field"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="field_1" editable="1"/>
+        <field name="field_2" editable="1"/>
+        <field name="field_3" editable="1"/>
+        <field name="stops kopírovat__uid_" editable="0"/>
+        <field name="stops kopírovat_location_type" editable="0"/>
+        <field name="stops kopírovat_parent_station" editable="0"/>
+        <field name="stops kopírovat_platform_code" editable="0"/>
+        <field name="stops kopírovat_stop_lat" editable="0"/>
+        <field name="stops kopírovat_stop_lon" editable="0"/>
+        <field name="stops kopírovat_stop_name" editable="0"/>
+        <field name="stops kopírovat_stop_url" editable="0"/>
+        <field name="stops kopírovat_wheelchair_boarding" editable="0"/>
+        <field name="stops kopírovat_zone_id" editable="0"/>
+        <field name="stops__uid_" editable="0"/>
+        <field name="stops_location_type" editable="0"/>
+        <field name="stops_parent_station" editable="0"/>
+        <field name="stops_platform_code" editable="0"/>
+        <field name="stops_stop_lat" editable="0"/>
+        <field name="stops_stop_lon" editable="0"/>
+        <field name="stops_stop_name" editable="0"/>
+        <field name="stops_stop_url" editable="0"/>
+        <field name="stops_wheelchair_boarding" editable="0"/>
+        <field name="stops_zone_id" editable="0"/>
+      </editable>
+      <labelOnTop>
+        <field name="field_1" labelOnTop="0"/>
+        <field name="field_2" labelOnTop="0"/>
+        <field name="field_3" labelOnTop="0"/>
+        <field name="stops kopírovat__uid_" labelOnTop="0"/>
+        <field name="stops kopírovat_location_type" labelOnTop="0"/>
+        <field name="stops kopírovat_parent_station" labelOnTop="0"/>
+        <field name="stops kopírovat_platform_code" labelOnTop="0"/>
+        <field name="stops kopírovat_stop_lat" labelOnTop="0"/>
+        <field name="stops kopírovat_stop_lon" labelOnTop="0"/>
+        <field name="stops kopírovat_stop_name" labelOnTop="0"/>
+        <field name="stops kopírovat_stop_url" labelOnTop="0"/>
+        <field name="stops kopírovat_wheelchair_boarding" labelOnTop="0"/>
+        <field name="stops kopírovat_zone_id" labelOnTop="0"/>
+        <field name="stops__uid_" labelOnTop="0"/>
+        <field name="stops_location_type" labelOnTop="0"/>
+        <field name="stops_parent_station" labelOnTop="0"/>
+        <field name="stops_platform_code" labelOnTop="0"/>
+        <field name="stops_stop_lat" labelOnTop="0"/>
+        <field name="stops_stop_lon" labelOnTop="0"/>
+        <field name="stops_stop_name" labelOnTop="0"/>
+        <field name="stops_stop_url" labelOnTop="0"/>
+        <field name="stops_wheelchair_boarding" labelOnTop="0"/>
+        <field name="stops_zone_id" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>field_1</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="0" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Point">
+      <extent>
+        <xmin>14.03275000000000006</xmin>
+        <ymin>49.69966999999999757</ymin>
+        <xmax>15.19976999999999911</xmax>
+        <ymax>50.45096000000000203</ymax>
+      </extent>
+      <id>pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table="(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(lon,lat) as geom FROM pos_log WHERE delay >=-20) AS _subq_1_
+)" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>pos_log</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minz="0" maxy="0" maxz="0" miny="0" crs="" maxx="0" minx="0" dimensions="2"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" attr="delay" type="graduatedSymbol" forceraster="0" graduatedMethod="GraduatedColor">
+        <ranges>
+          <range lower="-17.000000000000000" render="true" label=" -17 - 60 " symbol="0" upper="60.000000000000000"/>
+          <range lower="60.000000000000000" render="true" label=" 60 - 120 " symbol="1" upper="120.000000000000000"/>
+          <range lower="120.000000000000000" render="true" label=" 120 - 300 " symbol="2" upper="300.000000000000000"/>
+          <range lower="300.000000000000000" render="true" label=" 300 - 600 " symbol="3" upper="600.000000000000000"/>
+          <range lower="600.000000000000000" render="true" label=" 600 - 2385 " symbol="4" upper="2385.000000000000000"/>
+        </ranges>
+        <symbols>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="0,172,48,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="1" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="106,100,28,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="2" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="171,56,16,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="3" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="213,28,8,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" alpha="1" name="4" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="29,191,59,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp name="[source]" type="gradient">
+          <prop k="color1" v="0,172,48,255"/>
+          <prop k="color2" v="255,0,0,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="rampType" v="gradient"/>
+          <prop k="stops" v="0.336538;143,75,21,255"/>
+        </colorramp>
+        <mode name="quantile"/>
+        <rotation/>
+        <sizescale/>
+        <labelformat format=" %1 - %2 " decimalplaces="0" trimtrailingzeroes="false"/>
+      </renderer-v2>
+      <customproperties>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penColor="#000000" enabled="0" maxScaleDenominator="1e+8" lineSizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundColor="#ffffff" width="15" penWidth="0" opacity="1" scaleDependency="Area" backgroundAlpha="255" minScaleDenominator="0" scaleBasedVisibility="0" rotationOffset="270" diagramOrientation="Up" height="15" labelPlacementMethod="XHeight" sizeType="MM" penAlpha="255">
+          <fontProperties description="Sans Serif,9,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute color="#000000" label="" field=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings showAll="1" obstacle="0" dist="0" placement="0" zIndex="0" linePlacementFlags="18" priority="0">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <fieldConfiguration>
+        <field name="_uid_">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="trip_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="route_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="route_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="cisrouteid">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tripnumber">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="headsign">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="runningnumber">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="canceled">
+          <editWidget type="CheckBox">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="trackingstatus">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="wheelchairaccess">
+          <editWidget type="CheckBox">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lat">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lon">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="delay">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="measuredstopid">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="measuredstopsequence">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="timestamp">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="_uid_"/>
+        <alias index="1" name="" field="trip_id"/>
+        <alias index="2" name="" field="route_id"/>
+        <alias index="3" name="" field="route_name"/>
+        <alias index="4" name="" field="cisrouteid"/>
+        <alias index="5" name="" field="tripnumber"/>
+        <alias index="6" name="" field="headsign"/>
+        <alias index="7" name="" field="runningnumber"/>
+        <alias index="8" name="" field="canceled"/>
+        <alias index="9" name="" field="trackingstatus"/>
+        <alias index="10" name="" field="wheelchairaccess"/>
+        <alias index="11" name="" field="lat"/>
+        <alias index="12" name="" field="lon"/>
+        <alias index="13" name="" field="delay"/>
+        <alias index="14" name="" field="measuredstopid"/>
+        <alias index="15" name="" field="measuredstopsequence"/>
+        <alias index="16" name="" field="timestamp"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="_uid_" applyOnUpdate="0"/>
+        <default expression="" field="trip_id" applyOnUpdate="0"/>
+        <default expression="" field="route_id" applyOnUpdate="0"/>
+        <default expression="" field="route_name" applyOnUpdate="0"/>
+        <default expression="" field="cisrouteid" applyOnUpdate="0"/>
+        <default expression="" field="tripnumber" applyOnUpdate="0"/>
+        <default expression="" field="headsign" applyOnUpdate="0"/>
+        <default expression="" field="runningnumber" applyOnUpdate="0"/>
+        <default expression="" field="canceled" applyOnUpdate="0"/>
+        <default expression="" field="trackingstatus" applyOnUpdate="0"/>
+        <default expression="" field="wheelchairaccess" applyOnUpdate="0"/>
+        <default expression="" field="lat" applyOnUpdate="0"/>
+        <default expression="" field="lon" applyOnUpdate="0"/>
+        <default expression="" field="delay" applyOnUpdate="0"/>
+        <default expression="" field="measuredstopid" applyOnUpdate="0"/>
+        <default expression="" field="measuredstopsequence" applyOnUpdate="0"/>
+        <default expression="" field="timestamp" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="_uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="trip_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="route_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="route_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="cisrouteid" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="tripnumber" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="headsign" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="runningnumber" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="canceled" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="trackingstatus" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="wheelchairaccess" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="delay" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="measuredstopid" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="measuredstopsequence" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="timestamp" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="_uid_" desc=""/>
+        <constraint exp="" field="trip_id" desc=""/>
+        <constraint exp="" field="route_id" desc=""/>
+        <constraint exp="" field="route_name" desc=""/>
+        <constraint exp="" field="cisrouteid" desc=""/>
+        <constraint exp="" field="tripnumber" desc=""/>
+        <constraint exp="" field="headsign" desc=""/>
+        <constraint exp="" field="runningnumber" desc=""/>
+        <constraint exp="" field="canceled" desc=""/>
+        <constraint exp="" field="trackingstatus" desc=""/>
+        <constraint exp="" field="wheelchairaccess" desc=""/>
+        <constraint exp="" field="lat" desc=""/>
+        <constraint exp="" field="lon" desc=""/>
+        <constraint exp="" field="delay" desc=""/>
+        <constraint exp="" field="measuredstopid" desc=""/>
+        <constraint exp="" field="measuredstopsequence" desc=""/>
+        <constraint exp="" field="timestamp" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" width="-1" name="_uid_" type="field"/>
+          <column hidden="0" width="-1" name="trip_id" type="field"/>
+          <column hidden="0" width="-1" name="route_id" type="field"/>
+          <column hidden="0" width="-1" name="route_name" type="field"/>
+          <column hidden="0" width="-1" name="cisrouteid" type="field"/>
+          <column hidden="0" width="-1" name="tripnumber" type="field"/>
+          <column hidden="0" width="-1" name="headsign" type="field"/>
+          <column hidden="0" width="-1" name="runningnumber" type="field"/>
+          <column hidden="0" width="-1" name="canceled" type="field"/>
+          <column hidden="0" width="-1" name="trackingstatus" type="field"/>
+          <column hidden="0" width="-1" name="wheelchairaccess" type="field"/>
+          <column hidden="0" width="-1" name="lat" type="field"/>
+          <column hidden="0" width="-1" name="lon" type="field"/>
+          <column hidden="0" width="-1" name="delay" type="field"/>
+          <column hidden="0" width="-1" name="measuredstopid" type="field"/>
+          <column hidden="0" width="-1" name="measuredstopsequence" type="field"/>
+          <column hidden="0" width="-1" name="timestamp" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="_uid_" editable="1"/>
+        <field name="canceled" editable="1"/>
+        <field name="cisrouteid" editable="1"/>
+        <field name="delay" editable="1"/>
+        <field name="headsign" editable="1"/>
+        <field name="lat" editable="1"/>
+        <field name="lon" editable="1"/>
+        <field name="measuredstopid" editable="1"/>
+        <field name="measuredstopsequence" editable="1"/>
+        <field name="route_id" editable="1"/>
+        <field name="route_name" editable="1"/>
+        <field name="runningnumber" editable="1"/>
+        <field name="timestamp" editable="1"/>
+        <field name="trackingstatus" editable="1"/>
+        <field name="trip_id" editable="1"/>
+        <field name="tripnumber" editable="1"/>
+        <field name="wheelchairaccess" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="_uid_" labelOnTop="0"/>
+        <field name="canceled" labelOnTop="0"/>
+        <field name="cisrouteid" labelOnTop="0"/>
+        <field name="delay" labelOnTop="0"/>
+        <field name="headsign" labelOnTop="0"/>
+        <field name="lat" labelOnTop="0"/>
+        <field name="lon" labelOnTop="0"/>
+        <field name="measuredstopid" labelOnTop="0"/>
+        <field name="measuredstopsequence" labelOnTop="0"/>
+        <field name="route_id" labelOnTop="0"/>
+        <field name="route_name" labelOnTop="0"/>
+        <field name="runningnumber" labelOnTop="0"/>
+        <field name="timestamp" labelOnTop="0"/>
+        <field name="trackingstatus" labelOnTop="0"/>
+        <field name="trip_id" labelOnTop="0"/>
+        <field name="tripnumber" labelOnTop="0"/>
+        <field name="wheelchairaccess" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>_uid_</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Line">
+      <extent>
+        <xmin>13.68591880798340021</xmin>
+        <ymin>49.63366317749019885</ymin>
+        <xmax>15.49198150634770066</xmax>
+        <ymax>50.49528503417970171</ymax>
+      </extent>
+      <id>shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='tid' srid=0 type=LineString checkPrimaryKeyUnicity='1' table="public"."shapes" (shape) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>shapes</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minz="0" maxy="0" maxz="0" miny="0" crs="" maxx="0" minx="0" dimensions="2"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="line">
+            <layer locked="0" pass="0" class="SimpleLine" enabled="1">
+              <prop k="capstyle" v="square"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="0,0,0,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penColor="#000000" enabled="0" maxScaleDenominator="1e+8" lineSizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundColor="#ffffff" width="15" penWidth="0" opacity="1" scaleDependency="Area" backgroundAlpha="255" minScaleDenominator="0" scaleBasedVisibility="0" rotationOffset="270" diagramOrientation="Up" height="15" labelPlacementMethod="XHeight" sizeType="MM" penAlpha="255">
+          <fontProperties description="Sans Serif,9,-1,5,50,0,0,0,0,0" style=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings showAll="1" obstacle="0" dist="0" placement="2" zIndex="0" linePlacementFlags="18" priority="0">
+        <properties>
+          <Option type="Map">
+            <Option value="" name="name" type="QString"/>
+            <Option name="properties"/>
+            <Option value="collection" name="type" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <fieldConfiguration>
+        <field name="route_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="route_short_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="shape_id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="route_id"/>
+        <alias index="1" name="" field="route_short_name"/>
+        <alias index="2" name="" field="shape_id"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="route_id" applyOnUpdate="0"/>
+        <default expression="" field="route_short_name" applyOnUpdate="0"/>
+        <default expression="" field="shape_id" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="route_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="route_short_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="shape_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="route_id" desc=""/>
+        <constraint exp="" field="route_short_name" desc=""/>
+        <constraint exp="" field="shape_id" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" width="-1" name="route_id" type="field"/>
+          <column hidden="0" width="-1" name="route_short_name" type="field"/>
+          <column hidden="0" width="-1" name="shape_id" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="route_id" editable="1"/>
+        <field name="route_short_name" editable="1"/>
+        <field name="shape_id" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="route_id" labelOnTop="0"/>
+        <field name="route_short_name" labelOnTop="0"/>
+        <field name="shape_id" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>route_id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Point">
+      <extent>
+        <xmin>13.69605999999999923</xmin>
+        <ymin>49.63792000000000115</ymin>
+        <xmax>15.47300000000000075</xmax>
+        <ymax>50.49110000000000298</ymax>
+      </extent>
+      <id>stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table="(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(stop_lon,stop_lat) as geom FROM gtfs_stops) AS _subq_1_
+)" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>stops</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="117,59,197,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="_uid_">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_lat">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_lon">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="zone_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_url">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="location_type">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="parent_station">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="wheelchair_boarding">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="platform_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="_uid_"/>
+        <alias index="1" name="" field="stop_id"/>
+        <alias index="2" name="" field="stop_name"/>
+        <alias index="3" name="" field="stop_lat"/>
+        <alias index="4" name="" field="stop_lon"/>
+        <alias index="5" name="" field="zone_id"/>
+        <alias index="6" name="" field="stop_url"/>
+        <alias index="7" name="" field="location_type"/>
+        <alias index="8" name="" field="parent_station"/>
+        <alias index="9" name="" field="wheelchair_boarding"/>
+        <alias index="10" name="" field="platform_code"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="_uid_" applyOnUpdate="0"/>
+        <default expression="" field="stop_id" applyOnUpdate="0"/>
+        <default expression="" field="stop_name" applyOnUpdate="0"/>
+        <default expression="" field="stop_lat" applyOnUpdate="0"/>
+        <default expression="" field="stop_lon" applyOnUpdate="0"/>
+        <default expression="" field="zone_id" applyOnUpdate="0"/>
+        <default expression="" field="stop_url" applyOnUpdate="0"/>
+        <default expression="" field="location_type" applyOnUpdate="0"/>
+        <default expression="" field="parent_station" applyOnUpdate="0"/>
+        <default expression="" field="wheelchair_boarding" applyOnUpdate="0"/>
+        <default expression="" field="platform_code" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="_uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="stop_id" constraints="2" notnull_strength="0" unique_strength="1" exp_strength="0"/>
+        <constraint field="stop_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="zone_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_url" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="location_type" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="parent_station" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="wheelchair_boarding" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="platform_code" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="_uid_" desc=""/>
+        <constraint exp="" field="stop_id" desc=""/>
+        <constraint exp="" field="stop_name" desc=""/>
+        <constraint exp="" field="stop_lat" desc=""/>
+        <constraint exp="" field="stop_lon" desc=""/>
+        <constraint exp="" field="zone_id" desc=""/>
+        <constraint exp="" field="stop_url" desc=""/>
+        <constraint exp="" field="location_type" desc=""/>
+        <constraint exp="" field="parent_station" desc=""/>
+        <constraint exp="" field="wheelchair_boarding" desc=""/>
+        <constraint exp="" field="platform_code" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" autoRefreshTime="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" minScale="1e+8" autoRefreshEnabled="0" refreshOnNotifyMessage="" labelsEnabled="0" simplifyDrawingHints="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" maxScale="0" type="vector" geometry="Point">
+      <extent>
+        <xmin>13.69605999999999923</xmin>
+        <ymin>49.63792000000000115</ymin>
+        <xmax>15.47300000000000075</xmax>
+        <ymax>50.49110000000000298</ymax>
+      </extent>
+      <id>stops_8bccdd91_058b_40a4_9156_e5d9e2725057</id>
+      <datasource>dbname='gtfs_pid' host=localhost port=5432 sslmode=disable key='_uid_' table="(SELECT row_number() over () AS _uid_,* FROM (SELECT *,ST_Makepoint(stop_lon,stop_lat) as geom FROM gtfs_stops) AS _subq_1_
+)" (geom) sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>stops kopírovat</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="výchozí">
+        <map-layer-style name="výchozí"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol clip_to_extent="1" alpha="1" name="0" type="marker">
+            <layer locked="0" pass="0" class="SimpleMarker" enabled="1">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="117,59,197,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="circle"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="_uid_">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_lat">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_lon">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="zone_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="stop_url">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="location_type">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="parent_station">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="wheelchair_boarding">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="platform_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="_uid_"/>
+        <alias index="1" name="" field="stop_id"/>
+        <alias index="2" name="" field="stop_name"/>
+        <alias index="3" name="" field="stop_lat"/>
+        <alias index="4" name="" field="stop_lon"/>
+        <alias index="5" name="" field="zone_id"/>
+        <alias index="6" name="" field="stop_url"/>
+        <alias index="7" name="" field="location_type"/>
+        <alias index="8" name="" field="parent_station"/>
+        <alias index="9" name="" field="wheelchair_boarding"/>
+        <alias index="10" name="" field="platform_code"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="_uid_" applyOnUpdate="0"/>
+        <default expression="" field="stop_id" applyOnUpdate="0"/>
+        <default expression="" field="stop_name" applyOnUpdate="0"/>
+        <default expression="" field="stop_lat" applyOnUpdate="0"/>
+        <default expression="" field="stop_lon" applyOnUpdate="0"/>
+        <default expression="" field="zone_id" applyOnUpdate="0"/>
+        <default expression="" field="stop_url" applyOnUpdate="0"/>
+        <default expression="" field="location_type" applyOnUpdate="0"/>
+        <default expression="" field="parent_station" applyOnUpdate="0"/>
+        <default expression="" field="wheelchair_boarding" applyOnUpdate="0"/>
+        <default expression="" field="platform_code" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint field="_uid_" constraints="3" notnull_strength="1" unique_strength="1" exp_strength="0"/>
+        <constraint field="stop_id" constraints="2" notnull_strength="0" unique_strength="1" exp_strength="0"/>
+        <constraint field="stop_name" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_lat" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_lon" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="zone_id" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="stop_url" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="location_type" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="parent_station" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="wheelchair_boarding" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+        <constraint field="platform_code" constraints="0" notnull_strength="0" unique_strength="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="_uid_" desc=""/>
+        <constraint exp="" field="stop_id" desc=""/>
+        <constraint exp="" field="stop_name" desc=""/>
+        <constraint exp="" field="stop_lat" desc=""/>
+        <constraint exp="" field="stop_lon" desc=""/>
+        <constraint exp="" field="zone_id" desc=""/>
+        <constraint exp="" field="stop_url" desc=""/>
+        <constraint exp="" field="location_type" desc=""/>
+        <constraint exp="" field="parent_station" desc=""/>
+        <constraint exp="" field="wheelchair_boarding" desc=""/>
+        <constraint exp="" field="platform_code" desc=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder>
+    <layer id="pos_log_d73f9f38_d5c9_487c_b060_bf30cc99d9da"/>
+    <layer id="shapes_7f51cd45_ef02_42da_a38e_96a2928db5d5"/>
+    <layer id="stops_08e1e25e_78e4_418e_accb_fd2d0d0ee0d5"/>
+    <layer id="delay_now_5a2ec696_eb0f_4b0c_be73_1eda5bcccf1e"/>
+    <layer id="delays_6a82e804_0cba_4031_bc8d_245f87b2d73b"/>
+    <layer id="stops_8bccdd91_058b_40a4_9156_e5d9e2725057"/>
+    <layer id="delays2_8a796229_e68c_4736_919c_a2949cdec10d"/>
+  </layerorder>
+  <properties>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <Measure>
+      <Ellipsoid type="QString">WGS84</Ellipsoid>
+    </Measure>
+    <PAL>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <DrawOutlineLabels type="bool">true</DrawOutlineLabels>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <SearchMethod type="int">0</SearchMethod>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <CandidatesLine type="int">50</CandidatesLine>
+    </PAL>
+    <Gui>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+    </Gui>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <Measurement>
+      <AreaUnits type="QString"></AreaUnits>
+      <DistanceUnits type="QString"></DistanceUnits>
+    </Measurement>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+  </properties>
+  <visibility-presets/>
+  <transformContext/>
+  <Annotations/>
+  <Layouts>
+    <Layout name="zpozdeni" worldFileMap="{ecffa909-e2c5-43d0-9164-ba088570aabd}" units="mm" printResolution="463">
+      <Snapper snapToGuides="1" snapToGrid="0" tolerance="5" snapToItems="1"/>
+      <Grid offsetX="0" offsetUnits="mm" offsetY="0" resUnits="mm" resolution="10"/>
+      <PageCollection>
+        <symbol clip_to_extent="1" alpha="1" name="" type="fill">
+          <layer locked="0" pass="0" class="SimpleFill" enabled="1">
+            <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+            <prop k="color" v="255,255,255,255"/>
+            <prop k="joinstyle" v="miter"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="35,35,35,255"/>
+            <prop k="outline_style" v="no"/>
+            <prop k="outline_width" v="0.26"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="style" v="solid"/>
+            <data_defined_properties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </data_defined_properties>
+          </layer>
+        </symbol>
+        <LayoutItem positionOnPage="0,0,mm" type="65638" uuid="{03cf8aac-e1a4-481e-baae-8f0f42b5b6b9}" zValue="0" id="" positionLock="false" size="1125,2436,px" outlineWidthM="0.3,mm" frameJoinStyle="miter" background="true" blendMode="0" templateUuid="{03cf8aac-e1a4-481e-baae-8f0f42b5b6b9}" visibility="1" opacity="1" position="0,0,mm" groupUuid="" frame="false" itemRotation="0" referencePoint="0" excludeFromExports="0">
+          <FrameColor green="0" alpha="255" blue="0" red="0"/>
+          <BackgroundColor green="255" alpha="255" blue="255" red="255"/>
+          <LayoutObject>
+            <dataDefinedProperties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </dataDefinedProperties>
+            <customproperties/>
+          </LayoutObject>
+        </LayoutItem>
+        <GuideCollection visible="1"/>
+      </PageCollection>
+      <LayoutItem mapRotation="0" positionOnPage="0,0,mm" type="65639" uuid="{ecffa909-e2c5-43d0-9164-ba088570aabd}" zValue="1" id="" followPresetName="" positionLock="false" keepLayerSet="false" size="95.25,206.248,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" background="true" blendMode="0" templateUuid="{ecffa909-e2c5-43d0-9164-ba088570aabd}" visibility="1" opacity="1" position="0,0,mm" followPreset="false" drawCanvasItems="true" groupUuid="" frame="false" itemRotation="0" referencePoint="0" excludeFromExports="0">
+        <FrameColor green="0" alpha="255" blue="0" red="0"/>
+        <BackgroundColor green="255" alpha="255" blue="255" red="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option value="" name="name" type="QString"/>
+              <Option name="properties"/>
+              <Option value="collection" name="type" type="QString"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <Extent xmax="14.54740489466039399" xmin="14.10819721008267713" ymin="49.61040546042136867" ymax="50.56143650009365587"/>
+        <LayerSet/>
+        <AtlasMap atlasDriven="0" scalingMode="2" margin="0.10000000000000001"/>
+      </LayoutItem>
+      <customproperties>
+        <property value="png" key="atlasRasterFormat"/>
+        <property value="true" key="imageAntialias"/>
+        <property value="0" key="imageCropMarginBottom"/>
+        <property value="0" key="imageCropMarginLeft"/>
+        <property value="0" key="imageCropMarginRight"/>
+        <property value="0" key="imageCropMarginTop"/>
+        <property value="false" key="imageCropToContents"/>
+      </customproperties>
+      <Atlas filenamePattern="'output_'||@atlas_featurenumber" sortFeatures="0" coverageLayer="" pageNameExpression="" filterFeatures="0" enabled="0" hideCoverage="0"/>
+    </Layout>
+    <Layout name="all" worldFileMap="{64662d83-9b56-4a85-8ed8-775ea06fdeba}" units="mm" printResolution="300">
+      <Snapper snapToGuides="1" snapToGrid="0" tolerance="5" snapToItems="1"/>
+      <Grid offsetX="0" offsetUnits="mm" offsetY="0" resUnits="mm" resolution="10"/>
+      <PageCollection>
+        <symbol clip_to_extent="1" alpha="1" name="" type="fill">
+          <layer locked="0" pass="0" class="SimpleFill" enabled="1">
+            <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+            <prop k="color" v="255,255,255,255"/>
+            <prop k="joinstyle" v="miter"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="35,35,35,255"/>
+            <prop k="outline_style" v="no"/>
+            <prop k="outline_width" v="0.26"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="style" v="solid"/>
+            <data_defined_properties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </data_defined_properties>
+          </layer>
+        </symbol>
+        <LayoutItem positionOnPage="0,0,mm" type="65638" uuid="{77fe17ed-b5e2-450a-a190-3eae29f2f74e}" zValue="0" id="" positionLock="false" size="297,210,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" background="true" blendMode="0" templateUuid="{77fe17ed-b5e2-450a-a190-3eae29f2f74e}" visibility="1" opacity="1" position="0,0,mm" groupUuid="" frame="false" itemRotation="0" referencePoint="0" excludeFromExports="0">
+          <FrameColor green="0" alpha="255" blue="0" red="0"/>
+          <BackgroundColor green="255" alpha="255" blue="255" red="255"/>
+          <LayoutObject>
+            <dataDefinedProperties>
+              <Option type="Map">
+                <Option value="" name="name" type="QString"/>
+                <Option name="properties"/>
+                <Option value="collection" name="type" type="QString"/>
+              </Option>
+            </dataDefinedProperties>
+            <customproperties/>
+          </LayoutObject>
+        </LayoutItem>
+        <GuideCollection visible="1"/>
+      </PageCollection>
+      <LayoutItem mapRotation="0" positionOnPage="0,0,mm" type="65639" uuid="{64662d83-9b56-4a85-8ed8-775ea06fdeba}" zValue="1" id="" followPresetName="" positionLock="false" keepLayerSet="false" size="297,210,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" background="true" blendMode="0" templateUuid="{64662d83-9b56-4a85-8ed8-775ea06fdeba}" visibility="1" opacity="1" position="0,0,mm" followPreset="false" drawCanvasItems="true" groupUuid="" frame="false" itemRotation="0" referencePoint="0" excludeFromExports="0">
+        <FrameColor green="0" alpha="255" blue="0" red="0"/>
+        <BackgroundColor green="255" alpha="255" blue="255" red="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option value="" name="name" type="QString"/>
+              <Option name="properties"/>
+              <Option value="collection" name="type" type="QString"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <Extent xmax="15.34606946891240931" xmin="13.77936281161295717" ymin="49.47136760768558617" ymax="50.57913999163469043"/>
+        <LayerSet/>
+        <AtlasMap atlasDriven="0" scalingMode="2" margin="0.10000000000000001"/>
+      </LayoutItem>
+      <customproperties>
+        <property value="png" key="atlasRasterFormat"/>
+        <property value="true" key="imageAntialias"/>
+        <property value="0" key="imageCropMarginBottom"/>
+        <property value="0" key="imageCropMarginLeft"/>
+        <property value="0" key="imageCropMarginRight"/>
+        <property value="0" key="imageCropMarginTop"/>
+        <property value="false" key="imageCropToContents"/>
+      </customproperties>
+      <Atlas filenamePattern="'output_'||@atlas_featurenumber" sortFeatures="0" coverageLayer="" pageNameExpression="" filterFeatures="0" enabled="0" hideCoverage="0"/>
+    </Layout>
+  </Layouts>
+</qgis>
